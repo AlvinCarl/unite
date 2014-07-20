@@ -130,8 +130,8 @@ public class FullscreenActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(FullscreenActivity.this, ContactorActivity.class);
 				startActivity(intent);
-				// 停止当前的activityk
-				finish();
+				// 停止当前的activity
+				// finish();
 			}
 		});
 

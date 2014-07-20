@@ -8,6 +8,14 @@
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
         android:orientation="horizontal">
+        
+    <Button
+           android:id="@+id/selectall"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/contactListView"
+           android:layout_weight="1"
+           android:text="全选" />
     
     <Button
            android:id="@+id/sumbit"
@@ -15,15 +23,7 @@
            android:layout_height="wrap_content"
            android:layout_above="@+id/contactListView"
            android:layout_weight="1"
-           android:text="sumbit" />
-      
-       <Button
-           android:id="@+id/selectall"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_above="@+id/contactListView"
-           android:layout_weight="1"
-           android:text="getall" />
+           android:text="确定" />
        
        <Button
            android:id="@+id/cancel"
@@ -31,7 +31,7 @@
            android:layout_height="wrap_content"
            android:layout_above="@+id/contactListView"
            android:layout_weight="1"
-           android:text="cancel" />
+           android:text="取消" />
 
        </LinearLayout>
        

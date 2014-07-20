@@ -36,8 +36,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int datingbutton=0x7f07000d;
         public static final int fullscreen_content=0x7f07000a;
         public static final int fullscreen_content_controls=0x7f07000b;
-        public static final int selectall=0x7f070003;
-        public static final int sumbit=0x7f070001;
+        public static final int selectall=0x7f070001;
+        public static final int sumbit=0x7f070003;
         public static final int systembutton=0x7f07000e;
         public static final int test_bottom_buttons=0x7f070000;
     }

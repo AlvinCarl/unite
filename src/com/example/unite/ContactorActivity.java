@@ -25,6 +25,7 @@ import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.text.InputFilter.LengthFilter;
 import android.text.TextUtils;	
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;	 
 import android.view.View;  
 import android.view.View.OnClickListener;
@@ -73,6 +74,22 @@ public class ContactorActivity extends Activity {
     	myAdapter.notifyDataSetChanged();
         // TextView显示最新的选中数目
     	tvShow.setText("已选中" + iChooseNum + "项");
+    }
+    
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {  
+       // 如果是物理返回按键
+       if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+       {    
+    	   // Do you want to do.
+    	// 停止当前的activity
+    	   finish();
+           return true;
+        } 
+       else // 如果不是物理返回按键则正常响应  
+       {
+            return super.onKeyDown(keyCode, event);
+       }
     }
   
 	@Override  
@@ -133,7 +150,7 @@ public class ContactorActivity extends Activity {
             }
         });
         
-        // 反选按钮的回调接口
+        // 取消按钮的回调接口
         btCancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
