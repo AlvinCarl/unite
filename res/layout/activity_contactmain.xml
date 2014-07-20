@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout android:id="@+id/test_bottom_buttons" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
+    
+    <Button
+           android:id="@+id/sumbit"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/contactListView"
+           android:layout_weight="1"
+           android:text="sumbit" />
+      
+       <Button
+           android:id="@+id/selectall"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/contactListView"
+           android:layout_weight="1"
+           android:text="getall" />
+       
+       <Button
+           android:id="@+id/cancel"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/contactListView"
+           android:layout_weight="1"
+           android:text="cancel" />
+
+       </LinearLayout>
+       
+        <TextView
+           android:id="@+id/chooseview"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/contactListView"
+           android:text="" />
+      
+       <!-- 有一个textview来显示有多少个被选定的 -->
+       <LinearLayout android:id="@+id/test_bottom_buttons" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal" 
+        android:layout_alignParentBottom="true">
+
+       <ListView 
+           android:layout_width="wrap_content" 
+           android:layout_height="wrap_content" 
+           android:id="@+id/contactListView">
+        </ListView>
+        
+       </LinearLayout>
+</LinearLayout>
