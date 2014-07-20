@@ -90,21 +90,6 @@ public class ContactAdapter  extends BaseAdapter {
 	{
 		return chooseItemList;
 	}
-	
-	// remove the item
-	public void removeItem(ArrayList inputList, int pos)
-	{
-		for (int index = 0, len = inputList.size();  index < len; ++index)
-		{
-			int value = (Integer) inputList.get(index);
-			if (value == pos)
-			{
-				inputList.remove(index);
-				--len;
-				--index;
-			}
-		}
-	}
 		
 	// 进行展现的代码，用于展示当前的内容
 	public View getView(int position, View convertView, ViewGroup parent) {	 

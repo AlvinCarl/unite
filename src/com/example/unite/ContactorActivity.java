@@ -43,6 +43,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.example.unite.ContactAdapter;
 import com.example.unite.ContactAdapter.ViewHolder;
 import com.example.unite.LocalContactorInfo;
+import com.unite.data.ContactDataShare;
  
 
 /***  基础类，用于获取联系
@@ -67,6 +68,8 @@ public class ContactorActivity extends Activity {
 	private int iChooseNum;
 	// 显示已经选定了多少人
 	private TextView tvShow;
+	// 已经选定的人，做一个两层的结构来做
+	private HashMap contactmap;
 	
 	// 刷新listview和TextView的显示
     private void dataViewChanged() {
@@ -97,6 +100,7 @@ public class ContactorActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		// 设置当前界面为主界面
 		setContentView(R.layout.activity_contactmain);
+		contactmap = new HashMap();
 		
 		/** 实例化各个控件 **/
 		mListView = (ListView)findViewById(R.id.contactListView);
@@ -134,35 +138,37 @@ public class ContactorActivity extends Activity {
             }
         });
 		
-		// 提交当前已经选择的联系人
-        btCancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 遍历list的长度，将已选的按钮设为未选
-                for (int index = 0; index < contactLength; index++) {
-                    if (myAdapter.getIsSelected().get(index)) {
-                    	myAdapter.getIsSelected().put(index, false);
-                        --iChooseNum;// 数量减1
-                    }
-                }
-                // 刷新listview和TextView的显示
-                dataViewChanged();
-            }
+		// 提交当前已经选择的联系人，这里将现有的联系人提交到application里面保留
+        btSubmit.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View v)
+        	{
+        		// 这里需要注意，用的应该是全局的变量，而不应该是new出来的
+        		ContactDataShare contactdata = (ContactDataShare)getApplication();
+        		contactdata.setContactInfo(contactmap);
+        		
+        		// 然后退出当前的activity
+        		finish();
+        	} 
         });
         
         // 取消按钮的回调接口
         btCancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 遍历list的长度，将已选的设为未选，未选的设为已选
+                // 遍历list的长度，将已选的设为未选
                 for (int index = 0; index < contactLength; index++) {
                     if (myAdapter.getIsSelected().get(index)) {
                     	myAdapter.getIsSelected().put(index, false);
                         --iChooseNum;
-                    } else {
+                    }
+                    /*	这里是将未选的替换成了已选
+                    else 
+                    {
                         myAdapter.getIsSelected().put(index, true);
                         ++iChooseNum;
                     }
+                    */
                 }
                 // 刷新listview和TextView的显示
                 dataViewChanged();
@@ -178,8 +184,9 @@ public class ContactorActivity extends Activity {
 				
 				// 记录信息
 				Map<String, String> contactInfoMap = new HashMap<String, String>();
-				contactInfoMap.put(localContactor.mContactsName.get(position), 
-													localContactor.mContactsNumber.get(position));
+				String username = localContactor.mContactsName.get(position);
+				String userphone = localContactor.mContactsNumber.get(position);
+				contactInfoMap.put(username, userphone);
 				
 				mContactorsList.add(contactInfoMap);
 				
@@ -192,9 +199,16 @@ public class ContactorActivity extends Activity {
 				if (holder.checkbox.isChecked())
 				{
 					iChooseNum++;
+					contactmap.put(username, userphone);
 				}
 				else
 				{
+					// 准备删除contanctlist中已经存在的值
+					if (contactmap.containsKey(username))
+					{
+						// 目前没有考虑多线程操作，所以采用的方式很简单，多线程的时候注意这里
+						contactInfoMap.remove(username);
+					}
 					iChooseNum--;
 				}
 				

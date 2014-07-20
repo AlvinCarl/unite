@@ -1,10 +1,12 @@
 package com.example.unite;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import com.example.unite.FullscreenActivity;
 import com.example.unite.util.SystemUiHider;
+import com.unite.data.ContactDataShare;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -12,6 +14,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +27,8 @@ import android.widget.Toast;
  * @see SystemUiHider
  */
 public class FullscreenActivity extends Activity {
+	
+	protected static final String ACTIVITY_TAG="mainlog";  
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -51,18 +56,21 @@ public class FullscreenActivity extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
+	private  ContactDataShare datashare;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_fullscreen);
-
+		
+		datashare = (ContactDataShare)getApplication();
+		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 		
 		// 找到这个button
 		final Button contactButton = (Button)findViewById(R.id.contactorbutton);
+		final Button meetButton = (Button)findViewById(R.id.datingbutton);
 
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
@@ -134,6 +142,16 @@ public class FullscreenActivity extends Activity {
 				// finish();
 			}
 		});
+		
+		// 点击约会事件
+		meetButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// 试验是否拿到了数据
+		        		HashMap contactinfo = datashare.getContactInfo();
+		        		Log.d(ACTIVITY_TAG, "the value is, " + contactinfo.toString());
+					}
+				});
 
 		// Upon interacting with UI controls, delay any scheduled hide()
 		// operations to prevent the jarring behavior of controls going away
