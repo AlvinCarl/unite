@@ -36,6 +36,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int datingbutton=0x7f07000d;
         public static final int fullscreen_content=0x7f07000a;
         public static final int fullscreen_content_controls=0x7f07000b;
+        public static final int locationview=0x7f07000f;
         public static final int selectall=0x7f070001;
         public static final int sumbit=0x7f070003;
         public static final int systembutton=0x7f07000e;
@@ -45,6 +46,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_contactmain=0x7f030000;
         public static final int activity_contactscreen=0x7f030001;
         public static final int activity_fullscreen=0x7f030002;
+        public static final int activity_location=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

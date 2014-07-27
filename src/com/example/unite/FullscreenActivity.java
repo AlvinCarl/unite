@@ -10,6 +10,7 @@ import com.unite.data.ContactDataShare;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -149,7 +150,15 @@ public class FullscreenActivity extends Activity {
 					public void onClick(View v) {
 						// 试验是否拿到了数据
 		        		HashMap contactinfo = datashare.getContactInfo();
-		        		Log.d(ACTIVITY_TAG, "the value is, " + contactinfo.toString());
+		        		if (contactinfo != null)
+		        		{
+		        			Log.d(ACTIVITY_TAG, "the value is, " + contactinfo.toString());
+		        		}
+		        		
+		        		// 注册一个新的intent
+						Intent intent = new Intent();
+						intent.setClass(FullscreenActivity.this, LocationActivity.class);
+						startActivity(intent);
 					}
 				});
 
