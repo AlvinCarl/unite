@@ -1,6 +1,8 @@
 package com.example.unite;
 
 
+import java.util.HashMap;
+
 import com.amap.api.location.LocationManagerProxy;
 
 import android.app.Activity;
@@ -18,6 +20,8 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -122,7 +126,22 @@ public class LocationActivity extends Activity {
 		// find location show
 		locationStruct locateInfo = getLocationInfo();
 		locationShow.setText("地理位置信息:\n" + "经度: " + locateInfo.longtitude + "\n纬度: " + locateInfo.altitude + "\n海拔: " + locateInfo.latitude);
-	}
+		
+		// get button of show map
+		Button showMapButton = (Button)findViewById(R.id.showmap);
+		// 点击约会事件
+		showMapButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+		        		// 注册一个新的intent
+						Intent intent = new Intent();
+						// 跳转到地图事件
+						intent.setClass(LocationActivity.this, MapActivity.class);
+						startActivity(intent);
+					}
+				});
+    
+    }
     
     /**
      *  根据当前的状况来返回最适合的信息
